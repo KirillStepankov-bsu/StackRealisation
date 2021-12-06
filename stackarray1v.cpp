@@ -22,3 +22,4 @@ private:
     T *data;
     int size;
 };
+

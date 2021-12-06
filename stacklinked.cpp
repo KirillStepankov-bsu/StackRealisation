@@ -1,7 +1,0 @@
-class Stack{
-public:
-
-private:
-
-};
-
