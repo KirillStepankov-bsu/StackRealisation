@@ -3,7 +3,7 @@ class Stack {
 public:
     Stack() : size(0) { data = new T; }
 
-    [[maybe_unused]] void push(int element) { data[size++] = element; }
+    void push(int element) { data[size++] = element; }
 
     T pop() { return data[--size]; }
 
