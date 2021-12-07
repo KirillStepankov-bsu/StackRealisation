@@ -3,4 +3,4 @@ project(stack)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(stack stackarray3v.cpp stackarray2v.cpp stackarray1v.cpp)
+add_executable(stack linkedstackv1.cpp stackarray3v.cpp stackarray2v.cpp stackarray1v.cpp)
