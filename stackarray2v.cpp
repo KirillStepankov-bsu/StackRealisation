@@ -33,7 +33,6 @@ Stack<T>::Stack(const Stack &st) {
 template<typename T>
 void Stack<T>::push(T item) {
     T *tmp = stack;
-
     stack = new T[size_ + 1];
 
     size_++;
