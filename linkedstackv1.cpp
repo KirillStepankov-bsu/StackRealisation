@@ -19,9 +19,14 @@ public:
 
     T Pop();
 
-    Stack(const Stack<T> &stack); //-
+    Stack(const Stack<T> &rhs);
 
-    Stack &operator=(const Stack &stack); //-
+    bool operator==(const Stack &rhs) const;
+
+    Stack &operator=(const Stack &stack);
+
+private:
+    void Assignment(const Stack<T> &rhs);
 
 private:
     template<typename A>
@@ -68,12 +73,55 @@ void Stack<T>::Clear() {
 }
 
 template<typename T>
-Stack<T>::Stack(const Stack<T> &stack) {
-//-----------------------------------------------------------
+Stack<T>::Stack(const Stack<T> &rhs) {
+    Assignment(rhs);
 }
 
 template<typename T>
 Stack<T> &Stack<T>::operator=(const Stack<T> &rhs) {
-//-----------------------------------------------------------
+    Clear();
+    if (rhs.top == nullptr) {
+        return *this;
+    }
+    Assignment(rhs);
+    return *this;
+}
+
+template<typename T>
+void Stack<T>::Assignment(const Stack<T> &rhs) {
+    top = new Node<T>(rhs.top->data_, rhs.top);
+    size = rhs.size;
+    Node<T> *temp1 = top;
+    Node<T> *temp2 = rhs.top;
+    int counter = 0;
+    while (counter != rhs.size) {
+        temp1->prevN_ = temp2->prevN_;
+        temp1 = temp1->prevN_;
+        temp2 = temp2->prevN_;
+        counter++;
+    }
+    delete temp1;
+    delete temp2;
+    temp1 = nullptr;
+    temp2 = nullptr;
+}
+
+template<typename T>
+bool Stack<T>::operator==(const Stack &rhs) const {
+    if (size != rhs.size)
+        return false;
+
+    Node<T> *temp1 = top;
+    Node<T> *temp2 = rhs.top;
+    int counter = 0;
+    while(counter != size){
+        if(temp1->prevN_ != temp2->prevN_) return false;
+        temp1 = temp1->prevN_;
+        temp2 = temp2->prevN_;
+        counter++;
+    }
+    delete temp1; temp1 = nullptr;
+    delete temp2; temp2 = nullptr;
+    return true;
 }
 
